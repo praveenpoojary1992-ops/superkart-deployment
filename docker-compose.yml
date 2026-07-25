@@ -1,0 +1,24 @@
+services:
+  backend:
+    build: ./backend
+    container_name: backend
+    ports:
+      - "7860:7860"
+    networks:
+      - superkart-net
+
+  frontend:
+    build: ./frontend
+    container_name: frontend
+    ports:
+      - "8501:8501"
+    environment:
+      - BACKEND_URL=http://backend:7860/predict
+    depends_on:
+      - backend
+    networks:
+      - superkart-net
+
+networks:
+  superkart-net:
+    driver: bridge
