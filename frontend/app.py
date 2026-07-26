@@ -6,11 +6,12 @@ Calls the Flask backend API (hosted on a separate Hugging Face Space) to get pre
 
 import streamlit as st
 import requests
+import os
 
 st.set_page_config(page_title="SuperKart Sales Forecast", page_icon="🛒", layout="centered")
 
 # Base URL of the Flask backend
-BACKEND_URL = st.secrets.get("BACKEND_URL", "http://backend:7860")
+BACKEND_URL = os.environ.get("BACKEND_URL") or "http://backend:7860/predict"
 
 # Set the title of the Streamlit app
 st.title("🛒 SuperKart Sales Forecast")
